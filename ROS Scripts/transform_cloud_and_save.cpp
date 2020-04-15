@@ -20,6 +20,8 @@
 int count = 0;
 //pcl::visualization::CloudViewer viewer ("Simple Cloud Viewer");
 tf::TransformListener *listener = NULL;   
+std::ostringstream oss;
+std::ostringstream oss2;
 
 void cloud_cb(const sensor_msgs::PointCloud2ConstPtr& input)
 {
@@ -51,9 +53,31 @@ void cloud_cb(const sensor_msgs::PointCloud2ConstPtr& input)
     std::cout << "Quaternion: " << rotation.x() << " " << origin.y() << " " << rotation.z() << " " << rotation.w() << std::endl;
     tf::transformTFToEigen(transform, transform_eigen);
 
+    pcl::PointCloud<pcl::PointXYZ>::Ptr transform_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+    transform_cloud->points.resize(temp_cloud->size());
+
+    pcl::transformPointCloud(*temp_cloud, *transform_cloud, transform_eigen);
+
+    std::ostringstream oss3;
+    std::cout << oss2.str() << std::endl;
+    oss3 << oss2.str() << "/point_cloud_" << count << ".pcd";
+    pcl::io::savePCDFileASCII(oss3.str(), *transform_cloud);
+    // viewer.showCloud(transform_cloud);
 }
 
 int main(int argc, char** argv){
+
+  std::time_t t = std::time(0);
+  std::tm* now = std::localtime(&t);
+  oss << "/home/naik/Data/PointCloud/" << (now->tm_mon + 1) << "-" 
+      << (now->tm_mday) << "-" << (now->tm_year + 1900);
+  mode_t nMode = 0733;
+  int nError = 0;
+  nError = mkdir(oss.str().c_str(), nMode);
+
+  oss2 << "/home/naik/Data/PointCloud/" << (now->tm_mon + 1) << "-" 
+      << (now->tm_mday) << "-" << (now->tm_year + 1900) << "/unfiltered";
+  nError = mkdir(oss2.str().c_str(), nMode);
     
   ros::init(argc, argv, "my_tf_listener");
 

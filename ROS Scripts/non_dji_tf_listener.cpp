@@ -19,7 +19,7 @@
 
 int count = 0;
 //pcl::visualization::CloudViewer viewer ("Simple Cloud Viewer");
-tf::TransformListener *listener = NULL;   
+tf::TransformListener *listener = NULL;  
 
 void cloud_cb(const sensor_msgs::PointCloud2ConstPtr& input)
 {
@@ -35,7 +35,7 @@ void cloud_cb(const sensor_msgs::PointCloud2ConstPtr& input)
     tf::Vector3 origin;
     tf::Quaternion rotation;
     try{
-      listener->lookupTransform("/world", "/velodyne",  
+      listener->lookupTransform("/dji", "/velodyne",  
                                   ros::Time(0), transform);
     }
     catch (tf::TransformException ex){
@@ -51,6 +51,12 @@ void cloud_cb(const sensor_msgs::PointCloud2ConstPtr& input)
     std::cout << "Quaternion: " << rotation.x() << " " << origin.y() << " " << rotation.z() << " " << rotation.w() << std::endl;
     tf::transformTFToEigen(transform, transform_eigen);
 
+    pcl::PointCloud<pcl::PointXYZ>::Ptr transform_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+    transform_cloud->points.resize(temp_cloud->size());
+
+    pcl::transformPointCloud(*temp_cloud, *transform_cloud, transform_eigen);
+
+    // viewer.showCloud(transform_cloud);
 }
 
 int main(int argc, char** argv){

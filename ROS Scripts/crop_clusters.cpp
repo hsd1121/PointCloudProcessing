@@ -94,7 +94,7 @@ int main(int argc, char** argv)
         boxFilter.filter(*bodyFiltered);
         
         std::ostringstream oss;
-        oss << "/home/user01/Data/clusters/point_cloud_" << clustercount + 1 << ".pcd";
+        oss << "/home/naik/Data/clusters/point_cloud_" << clustercount + 1 << ".pcd";
         pcl::io::savePCDFileASCII(oss.str(), *bodyFiltered);
 
    

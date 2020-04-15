@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     std::cout << "Done concatenating." << std::endl;
     std::cout << "SAVING FILE! DO NOT EXIT YET!" << std::endl;
 
-    pcl::io::savePCDFileASCII("/home/user01/Data/PointCloud/concatenated_cloud.pcd", concatenated_cloud);
+    pcl::io::savePCDFileASCII("/home/naik/Data/PointCloud/concatenated_cloud.pcd", concatenated_cloud);
 
     std::cout << "Done saving file." << std::endl;
     return 0;

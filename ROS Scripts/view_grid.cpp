@@ -6,6 +6,8 @@
 #include <pcl/io/pcd_io.h>
 //#include <pcl/visualization/cloud_viewer.h>
 #include <pcl/visualization/pcl_visualizer.h>
+#include <string>
+#include <fstream>
 
 struct RGB_VAL{
     double r;       // a fraction between 0 and 1
@@ -96,9 +98,9 @@ RGB_VAL hsv2rgb(double h, double sl, double l) {
 
 int main(int argc, char** argv)
 {
-    if(argc != 2)
+    if(argc != 3)
     {
-        std::cerr << "Expecting input argument: file" << std::endl;
+        std::cerr << "Expecting input argument: point_cloud_file clusters_data_file" << std::endl;
         return -1;
     }
 
@@ -129,9 +131,6 @@ int main(int argc, char** argv)
         }
     }
 
-    std::cout << "Min Z Value: " << min_z << std::endl;
-    std::cout << "Max Z Value: " << max_z << std::endl;
-
     double s = 0.5;
     double v = 0.5;
     double h = 0;
@@ -153,7 +152,59 @@ int main(int argc, char** argv)
     viewer->setBackgroundColor (1, 1, 1);
     pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud_rgb);
     viewer->addPointCloud<pcl::PointXYZRGB> (cloud_rgb, rgb, "sample cloud");
-    viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "sample cloud");
+    viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "sample cloud");
+    
+    std::ifstream infile(argv[2]);
+    std::string line;
+    int linecount = 0;
+    int obb_count = 0;
+    while(std::getline(infile, line))
+    {
+        if(linecount == 0)
+        {
+            linecount++;
+            continue;
+        }
+        std::istringstream s(line);
+        std::string field;
+        int fieldcount = 0;
+        int clustercount = -1;
+        double rotation = -1;
+        double height = -1;
+        double width = -1;
+        double box_x = -1;
+        double box_y = -1;
+        while(getline(s, field, ','))
+        {
+            if(fieldcount == 0)
+                clustercount = std::atoi(field.c_str());
+            else if(fieldcount == 1)
+                rotation = std::atof(field.c_str());
+            else if(fieldcount == 2)
+                height = std::atof(field.c_str());
+            else if(fieldcount == 3)
+                width = std::atof(field.c_str());
+            else if(fieldcount == 4)
+                box_x = std::atof(field.c_str());
+            else if(fieldcount == 5)
+                box_y = std::atof(field.c_str());
+           /* std::cout << clustercount << std::endl;
+            std::cout << rotation << std::endl;
+            std::cout << width << std::endl;
+            std::cout << height << std::endl;
+            std::cout << box_x << std::endl;
+            std::cout << box_y << std::endl;
+*/
+            fieldcount++;
+        }
+        std::ostringstream obb_number;
+        obb_number << "obb  " << obb_count;
+        obb_count++;
+
+        viewer->addCube(box_x - (width/2), box_x + (width/2), box_y - (height/2), box_y + (height/2), 1, 1, 0, 0, 0, obb_number.str());
+
+    }
+    //viewer->addCube(9, 11, -1.5, 4.5, 0, 0, 0, 0, 0, "grid");
     viewer->addCoordinateSystem (1.0);
     viewer->initCameraParameters ();
 

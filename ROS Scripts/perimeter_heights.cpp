@@ -28,7 +28,7 @@ int main(int argc, char** argv)
 {
     if(argc != 3)
     {
-        std::cerr << "plot_only_file plot_all_file" << std::endl;
+        std::cerr << "plot_only_file perimeter_file" << std::endl;
         return -1;
     }
     
@@ -43,42 +43,14 @@ int main(int argc, char** argv)
     }
 
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr plot_all_cloud(new pcl::PointCloud<pcl::PointXYZ>);
-    if(pcl::io::loadPCDFile<pcl::PointXYZ> (argv[2], *plot_all_cloud) == -1)
+    pcl::PointCloud<pcl::PointXYZ>::Ptr perimeter_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+    if(pcl::io::loadPCDFile<pcl::PointXYZ> (argv[2], *perimeter_cloud) == -1)
     {
         PCL_ERROR("Couldn't read file ");
         PCL_ERROR(argv[2]);
         PCL_ERROR("\n");
         return (-1);
     }
-
-    
-    pcl::ExtractIndices<pcl::PointXYZ> extract;
-    for(size_t i = 0; i < plot_only_cloud->size(); i++)
-    {
-        
-        for(size_t j = 0; j < plot_all_cloud->size(); j++)
-        {
-            //std::cout << plot_all_cloud->points[j].x << " " << plot_only_cloud->points[i].x << std::endl;
-            //if(true)
-            if(plot_all_cloud->points[j].x == plot_only_cloud->points[i].x &&
-               plot_all_cloud->points[j].y == plot_only_cloud->points[i].y &&
-               plot_all_cloud->points[j].z == plot_only_cloud->points[i].z)
-            {
-                  pcl::PointIndices::Ptr inliers(new pcl::PointIndices());
-                  inliers->indices.push_back(j);
-                  extract.setInputCloud(plot_all_cloud);
-                  extract.setIndices(inliers);
-                  extract.setNegative(true);
-                  extract.filter(*plot_all_cloud);
-                  break;
-            }
-            
-        }
-        
-    }
-
-    pcl::io::savePCDFileASCII("/home/naik/Data/PointCloud/perimeter.pcd", *plot_all_cloud);
     
 
     std::ofstream height_file;
@@ -88,17 +60,17 @@ int main(int argc, char** argv)
     sum.x = 0;
     sum.y = 0;
     sum.z = 0;
-    for(size_t i = 0; i < plot_all_cloud->points.size(); i++)
+    for(size_t i = 0; i < perimeter_cloud->points.size(); i++)
     {
-        sum.x += plot_all_cloud->points[i].x;
-        sum.y += plot_all_cloud->points[i].y;
-        sum.z += plot_all_cloud->points[i].z;
+        sum.x += perimeter_cloud->points[i].x;
+        sum.y += perimeter_cloud->points[i].y;
+        sum.z += perimeter_cloud->points[i].z;
     }
 
     Vector3 centroid;
-    centroid.x = sum.x / plot_all_cloud->size();
-    centroid.y = sum.y / plot_all_cloud->size();
-    centroid.z = sum.z / plot_all_cloud->size();
+    centroid.x = sum.x / perimeter_cloud->size();
+    centroid.y = sum.y / perimeter_cloud->size();
+    centroid.z = sum.z / perimeter_cloud->size();
 
     double xx = 0.0;
     double xy = 0.0;
@@ -107,12 +79,12 @@ int main(int argc, char** argv)
     double yz = 0.0;
     double zz = 0.0;
 
-    for(size_t i = 0; i < plot_all_cloud->points.size(); i++)
+    for(size_t i = 0; i < perimeter_cloud->points.size(); i++)
     {
        Vector3 r;
-       r.x = plot_all_cloud->points[i].x - centroid.x;
-       r.y = plot_all_cloud->points[i].y - centroid.y;
-       r.z = plot_all_cloud->points[i].z - centroid.z;
+       r.x = perimeter_cloud->points[i].x - centroid.x;
+       r.y = perimeter_cloud->points[i].y - centroid.y;
+       r.z = perimeter_cloud->points[i].z - centroid.z;
        xx += r.x * r.x;
        xy += r.x * r.y;
        xz += r.x * r.z;

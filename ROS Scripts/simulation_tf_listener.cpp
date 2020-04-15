@@ -19,7 +19,7 @@
 
 int count = 0;
 //pcl::visualization::CloudViewer viewer ("Simple Cloud Viewer");
-tf::TransformListener *listener = NULL;   
+tf::TransformListener *listener = NULL;  
 
 void cloud_cb(const sensor_msgs::PointCloud2ConstPtr& input)
 {
@@ -35,7 +35,7 @@ void cloud_cb(const sensor_msgs::PointCloud2ConstPtr& input)
     tf::Vector3 origin;
     tf::Quaternion rotation;
     try{
-      listener->lookupTransform("/world", "/velodyne",  
+      listener->lookupTransform("/world", "/laser0_frame",  
                                   ros::Time(0), transform);
     }
     catch (tf::TransformException ex){
@@ -54,14 +54,14 @@ void cloud_cb(const sensor_msgs::PointCloud2ConstPtr& input)
 }
 
 int main(int argc, char** argv){
-    
-  ros::init(argc, argv, "my_tf_listener");
+
+   ros::init(argc, argv, "my_tf_listener");
 
   ros::NodeHandle node;
   // tf::TransformListener listener;  
   listener = new(tf::TransformListener);
 
-  ros::Subscriber sub = node.subscribe("velodyne_points", 1, cloud_cb);
+  ros::Subscriber sub = node.subscribe("velodyne_pointcloud", 1, cloud_cb);
 
   // ros::Rate rate(10.0);
   // while (node.ok()){

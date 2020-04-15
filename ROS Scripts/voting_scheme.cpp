@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     }
 
     std::ofstream myfile;
-    myfile.open ("/home/user01/Data/clusters_data.csv");
+    myfile.open ("/home/naik/Data/PointCloud/2-22-2020_Simulated/clusters_data.csv");
     int count = 0;
     std::list <pcl::PointCloud<pcl::PointXYZ> >::iterator it;
     for(it = cluster_list.begin(); it != cluster_list.end(); ++it) {

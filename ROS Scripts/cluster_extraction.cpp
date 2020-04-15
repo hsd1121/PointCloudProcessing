@@ -63,7 +63,7 @@ main (int argc, char** argv)
   seg.setModelType (pcl::SACMODEL_PLANE);
   seg.setMethodType (pcl::SAC_RANSAC);
   seg.setMaxIterations (100);
-  seg.setDistanceThreshold (0.1);
+  seg.setDistanceThreshold (0.2);
 
   int i=0, nr_points = (int) cloud_filtered->points.size ();
 

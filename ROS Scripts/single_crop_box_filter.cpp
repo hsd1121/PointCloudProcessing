@@ -82,8 +82,11 @@ int main(int argc, char** argv)
 
     pcl::PointCloud<pcl::PointXYZ>::Ptr bodyFiltered(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::CropBox<pcl::PointXYZ> boxFilter;
+    //boxFilter.setTranslation(Eigen::Vector3f(4, 1.5, 0));
     boxFilter.setMin(Eigen::Vector4f(negative_x_filter, negative_y_filter, negative_z_filter, 1.0));
     boxFilter.setMax(Eigen::Vector4f(positive_x_filter, positive_y_filter, positive_z_filter, 1.0));
+    //boxFilter.setMin(Eigen::Vector4f(-1, -3, -100, 1.0));
+    //boxFilter.setMax(Eigen::Vector4f(1, 3, 100, 1.0));
     boxFilter.setRotation(Eigen::Vector3f(rotation_x, rotation_y, rotation_z));
     boxFilter.setInputCloud(temp_cloud);
     boxFilter.filter(*bodyFiltered);

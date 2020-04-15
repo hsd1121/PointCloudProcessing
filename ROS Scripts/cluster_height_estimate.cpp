@@ -10,7 +10,9 @@
 #include <pcl/sample_consensus/method_types.h>
 #include <pcl/sample_consensus/model_types.h>
 #include <pcl/segmentation/sac_segmentation.h>
-#include <pcl/visualization/pcl_visualizer.h>
+//#include <pcl/visualization/pcl_visualizer.h>
+#include <pcl/visualization/cloud_viewer.h>
+
 #include <pcl/filters/crop_box.h>
 #include <math.h>
 #include <string>
@@ -61,7 +63,7 @@ int main(int argc, char** argv)
     pcl::PointCloud<pcl::PointXYZ>::Ptr bodyFiltered(new pcl::PointCloud<pcl::PointXYZ>);
 
     std::ofstream height_file;
-    height_file.open("/home/user01/Data/heights.csv");
+    height_file.open("/home/naik/Data/PointCloud/heights.csv");
     height_file << "Cluster #,Height (meters)\n";
 
     std::ifstream infile2(argv[3]);
@@ -109,7 +111,7 @@ int main(int argc, char** argv)
 
         height_file << clustercount << ",";
 
-        height += 4;
+        //height += 4;
         pcl::CropBox<pcl::PointXYZ> boxFilter;
         boxFilter.setTranslation(Eigen::Vector3f(box_x, box_y, 0));
         boxFilter.setRotation(Eigen::Vector3f(0, 0, rotation));
@@ -264,7 +266,7 @@ int main(int argc, char** argv)
 
                 double mag_dist = std::abs(temp_distance);
 
-                height_file << mag_dist << ",";
+                //height_file << mag_dist << ",";
 
                 if(mag_dist > distance) {
                     distance = mag_dist;
@@ -278,8 +280,9 @@ int main(int argc, char** argv)
         
         std::cerr << "Max distance in frame(meters): " << distance << " meters." << std::endl;
         //std::cerr << "Max distance in frame(inches): " << (distance * 39.3701) << " inches." << std::endl;
-    
+        height_file << distance << ",";
         height_file << std::endl;
+
     }
 
     /*
