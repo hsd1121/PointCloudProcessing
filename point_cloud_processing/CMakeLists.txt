@@ -178,6 +178,7 @@ add_executable(view_colored_plot src/view_colored_plot.cpp)
 add_executable(view_grid src/view_grid.cpp)
 add_executable(view_oriented_grid src/view_oriented_grid.cpp)
 add_executable(nnsearch src/nnsearch.cpp)
+add_executable(bt src/bt.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -231,6 +232,7 @@ target_link_libraries(view_colored_plot ${catkin_LIBRARIES})
 target_link_libraries(view_grid ${catkin_LIBRARIES})
 target_link_libraries(view_oriented_grid ${catkin_LIBRARIES})
 target_link_libraries(nnsearch ${catkin_LIBRARIES})
+target_link_libraries(bt ${catkin_LIBRARIES})
 
 #############
 ## Install ##
