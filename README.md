@@ -1,3 +1,5 @@
+ROS Package is in the point_cloud_processing folder.
+
 Datasets:
 
 Kentland Wheat Farm
