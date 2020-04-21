@@ -1,0 +1,8 @@
+<launch>
+  <param name="/use_sim_time" value="true"/>
+
+  <node pkg="point_cloud_processing" type="tf_listener" name="tf_listener"/>
+  <node pkg="point_cloud_processing" type="dji_tf_broadcast" name="dji_tf_broadcast"/>
+  <node pkg="point_cloud_processing" type="velodyne_tf_broadcast" name="velodyne_tf_broadcast"/>
+
+</launch>
