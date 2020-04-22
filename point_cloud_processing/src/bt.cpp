@@ -2,6 +2,8 @@
 #include <ros/ros.h>
 #include <octomap_msgs/Octomap.h>
 
+int count = 0;
+
 void octomap_cb(const octomap_msgs::Octomap& input)
 {
       
