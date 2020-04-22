@@ -13,6 +13,10 @@ void octomap_cb(const octomap_msgs::Octomap& input)
     count++;
     std::cout << count << std::endl;
     octomap::AbstractOcTree* tree = octomap_msgs::binaryMsgToMap(input);
+    //tree->write("test.bt");
+    octomap::OcTree* ocTree = new octomap::OcTree(0.1);
+    ocTree = dynamic_cast<octomap::OcTree*>(tree);
+    ocTree->writeBinary("test.bt");
 }
 
 int main(int argc, char** argv)
