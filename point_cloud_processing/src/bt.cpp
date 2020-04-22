@@ -1,6 +1,9 @@
 #include <iostream>
 #include <ros/ros.h>
 #include <octomap_msgs/Octomap.h>
+#include <octomap/octomap.h>
+#include <octomap/ColorOcTree.h>
+#include <octomap_msgs/conversions.h>
 
 int count = 0;
 
@@ -9,6 +12,7 @@ void octomap_cb(const octomap_msgs::Octomap& input)
       
     count++;
     std::cout << count << std::endl;
+    octomap::AbstractOcTree* tree = octomap_msgs::binaryMsgToMap(input);
 }
 
 int main(int argc, char** argv)

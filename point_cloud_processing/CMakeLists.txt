@@ -10,6 +10,7 @@ project(point_cloud_processing)
 find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
   pcl_ros
+  octomap_ros
   roscpp
   sensor_msgs
   cmake_modules
