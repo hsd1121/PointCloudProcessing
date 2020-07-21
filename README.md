@@ -4,6 +4,12 @@ to clear the octomap error:
 ```
 sudo apt-get install ros-kinetic-octomap ros-kinetic-octomap-mapping ros-kinetic-octomap-msgs ros-kinetic-octomap-ros ros-kinetic-octomap-rviz-plugins ros-kinetic-octomap-server
 source ~/catkin_ws/devel/setup.zsh 
+
+roscore
+roslaunch point_cloud_processing transform.launch
+cd /media/ksa/ubuntu_storage/works
+rosbag play Gazebo_0.5m_Ground.bag -l
+rviz rviz
 ```
 
 Datasets:
