@@ -12,12 +12,20 @@ rosbag play Gazebo_0.5m_Ground.bag -l
 rviz rviz
 ```
 
+Install the following packages to run farm_generation.py:
+```
+sudo apt-get install python3-sympy
+# you can also install:
+sudo apt-get install python3-numpy python3-scipy python3-matplotlib ipython ipython-notebook python3-pandas  python3-nose
+#installing collada
+sudo apt-get update -y
+pip3 install pycollada
+```
+
+
 Datasets:
-
 Kentland Wheat Farm
-
 https://drive.google.com/open?id=11Gq6jv23fsi0puPGos4_p8Nh1qeF4EdX
 
-Gazebo Soybean Farms
-
+Gazebo Soybean Farms:
 https://drive.google.com/open?id=1cbuy1wDpMB792Pbp7qokSVROeLPORPQV
