@@ -22,6 +22,11 @@ sudo apt-get update -y
 pip3 install pycollada
 ```
 
+In order to run farm_generation.py, take care of the path in the following files:
+1. models.txt
+2. Empty world
+3. soy.model
+
 
 Datasets:   
 Kentland Wheat Farm   
