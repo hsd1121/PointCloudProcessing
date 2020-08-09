@@ -1,3 +1,5 @@
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/S3yJ5RLepR0/0.jpg)](https://www.youtube.com/watch?v=S3yJ5RLepR0)
+
 ![alt text](https://github.com/hsd1121/PointCloudProcessing/blob/master/pics/kent_filtered.png?raw=true)
 
 ROS Package is in the point_cloud_processing folder.
