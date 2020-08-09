@@ -1,3 +1,5 @@
+![alt text](https://github.com/hsd1121/PointCloudProcessing/blob/master/pics/kent_filtered.png?raw=true)
+
 ROS Package is in the point_cloud_processing folder.
 
 Datasets:
