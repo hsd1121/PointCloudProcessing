@@ -1,5 +1,4 @@
 ![alt text](https://github.com/hsd1121/PointCloudProcessing/blob/master/pics/kent_filtered.png?raw=true)
-.center[This is an example output of the processing done on the point cloud scans. These scans were from the Kentland wheat farm. The colors represent the height of the points.]
 
 ROS Package is in the point_cloud_processing folder.
 
@@ -14,3 +13,5 @@ Gazebo Soybean Farms
 https://drive.google.com/open?id=1cbuy1wDpMB792Pbp7qokSVROeLPORPQV
 
 This project is partly funded by SmartFarm Innovation Network and Virginia Tech iCAT institute.
+
+![alt text](https://github.com/hsd1121/PointCloudProcessing/blob/master/pics/figure_5.PNG?raw=true)
