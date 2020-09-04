@@ -1,4 +1,4 @@
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/S3yJ5RLepR0/0.jpg)](https://www.youtube.com/watch?v=S3yJ5RLepR0)
+[![IMAGE ALT TEXT HERE](https://github.com/hsd1121/PointCloudProcessing/blob/master/pics/youtube_screenshot.png?raw=true)](https://www.youtube.com/watch?v=S3yJ5RLepR0)
 
 ![alt text](https://github.com/hsd1121/PointCloudProcessing/blob/master/pics/kent_filtered.png?raw=true)
 
