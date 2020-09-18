@@ -84,8 +84,10 @@ int main(int argc, char** argv){
   ros::NodeHandle node;
   // tf::TransformListener listener;  
   listener = new(tf::TransformListener);
+    
+  ros::Subscriber sub = node.subscribe("velodyne_points", 1, cloud_cb);
 
-  ros::Subscriber sub = node.subscribe("velodyne_pointcloud", 1, cloud_cb);
+//   ros::Subscriber sub = node.subscribe("velodyne_pointcloud", 1, cloud_cb);
 
   // ros::Rate rate(10.0);
   // while (node.ok()){
