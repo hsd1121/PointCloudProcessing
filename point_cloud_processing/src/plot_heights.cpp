@@ -168,6 +168,7 @@ int main(int argc, char** argv)
 
     std::ofstream height_file;
     height_file.open("plot_heights.csv");
+    height_file << "X position" << "," << "Y position" << "," << "Z position" << "," << "Height" << std::endl;
 
     std::cout << "Computing heights of plot" << std::endl;
     Vector3 sum;
@@ -264,7 +265,7 @@ int main(int argc, char** argv)
 
         double mag_dist = std::abs(temp_distance);
 
-        height_file << mag_dist << std::endl;
+        height_file << plot_only_cloud->points[i].x << "," << plot_only_cloud->points[i].y << "," << plot_only_cloud->points[i].z << "," << mag_dist << std::endl;
 
     }
     
