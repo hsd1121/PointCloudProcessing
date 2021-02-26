@@ -252,6 +252,9 @@ int main(int argc, char** argv)
     dir.y = dir.y / length;
     dir.z = dir.z / length;
 
+
+    //double d = (dir.x * centroid.x * -1) + (dir.y * centroid.y * -1) + (dir.z * centroid.z * -1);
+
     double distance = 0;
     Vector3 subtract;
     int index = -1;
@@ -261,11 +264,13 @@ int main(int argc, char** argv)
         subtract.x = plot_only_cloud->points[i].x - centroid.x;
         subtract.y = plot_only_cloud->points[i].y - centroid.y;
         subtract.z = plot_only_cloud->points[i].z - centroid.z;
+        //temp_distance = (plot_only_cloud->points[i].x * dir.x) + (plot_only_cloud->points[i].y * dir.y) + (plot_only_cloud->points[i].z * dir.z) + d;
+        //temp_distance = std::abs(temp_distance);
         temp_distance = (dir.x * subtract.x) + (dir.y * subtract.y) + (dir.z * subtract.z);
 
-        double mag_dist = std::abs(temp_distance);
+        //double mag_dist = std::abs(temp_distance);
 
-        height_file << plot_only_cloud->points[i].x << "," << plot_only_cloud->points[i].y << "," << plot_only_cloud->points[i].z << "," << mag_dist << std::endl;
+        height_file << plot_only_cloud->points[i].x << "," << plot_only_cloud->points[i].y << "," << plot_only_cloud->points[i].z << "," << temp_distance << std::endl;
 
     }
     
